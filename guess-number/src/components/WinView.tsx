@@ -1,6 +1,6 @@
 type WinViewProps = {
   attempts: number;
-  secretNumber: number; // ✅ добавили
+  secretNumber: number; // ✅ hinzugefügt
   playerName: string;
   onNameChange: (value: string) => void;
   onSave: () => void;
@@ -10,7 +10,7 @@ type WinViewProps = {
 
 export function WinView({
   attempts,
-  secretNumber, // ✅ добавили
+  secretNumber, // ✅ hinzugefügt
   playerName,
   onNameChange,
   onSave,
@@ -21,7 +21,7 @@ export function WinView({
     <div style={{ maxWidth: 520, margin: "40px auto", padding: 16 }}>
       <h1 style={{ textAlign: "center" }}>🎉 Gewonnen!</h1>
 
-      {/* ✅ показываем загаданное число */}
+      {/* ✅ geheime Zahl wird angezeigt */}
       <div style={{ textAlign: "center", fontSize: 42, margin: "16px 0" }}>
         {secretNumber}
       </div>
@@ -36,7 +36,7 @@ export function WinView({
         <input
           value={playerName}
           onChange={(e) => onNameChange(e.target.value)}
-          placeholder="Ваше имя"
+          placeholder="Dein Name"
           style={{ padding: 10, fontSize: 16, width: 220 }}
         />
         <button onClick={onSave} style={{ padding: "10px 14px" }}>

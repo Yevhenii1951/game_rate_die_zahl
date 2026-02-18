@@ -12,10 +12,10 @@ export function loadHighscores(): Highscore[] {
     if (!raw) return [];
     const parsed = JSON.parse(raw);
 
-    // Простая проверка на массив
+    // Einfache Überprüfung auf Array
     if (!Array.isArray(parsed)) return [];
 
-    // Фильтруем только корректные записи
+    // Nur korrekte Einträge filtern
     return parsed
       .filter(
         (x) =>

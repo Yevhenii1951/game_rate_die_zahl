@@ -1,22 +1,22 @@
-# ---------- 1) Build stage ----------
+# ---------- 1) Build-Stufe ----------
 FROM node:22-alpine AS build
 WORKDIR /app
 
-# копируем только package файлы и ставим зависимости
+# Kopiere nur package-Dateien und installiere Abhängigkeiten
 COPY package*.json ./
 RUN npm ci
 
-# копируем весь код приложения и собираем
+# Kopiere den gesamten Anwendungscode und baue
 COPY . .
 RUN npm run build
 
-# ---------- 2) Run stage (nginx) ----------
+# ---------- 2) Run-Stufe (nginx) ----------
 FROM nginx:alpine
 
-# конфиг nginx (SPA routing)
+# nginx-Konfiguration (SPA-Routing)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# готовый build от Vite лежит в /app/dist
+# Fertiger Vite-Build befindet sich in /app/dist
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
