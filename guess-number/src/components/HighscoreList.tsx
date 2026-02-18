@@ -12,7 +12,7 @@ export function HighscoreList({ highscores }: HighscoreListProps) {
 
       {highscores.length === 0 ? (
         <p style={{ textAlign: "center", opacity: 0.7 }}>
-          Пока нет результатов.
+          Noch keine Ergebnisse.
         </p>
       ) : (
         <div style={{ display: "grid", gap: 8 }}>

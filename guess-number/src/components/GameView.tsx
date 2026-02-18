@@ -18,7 +18,7 @@ export function GameView({
     <div style={{ maxWidth: 520, margin: "40px auto", padding: 16 }}>
       <h1 style={{ textAlign: "center" }}>Guess the number</h1>
 
-      {/* "Кружок попыток" */}
+      {/* Versuchsrunde */}
       <div
         style={{
           width: 60,
@@ -31,12 +31,12 @@ export function GameView({
           fontSize: 22,
           fontWeight: 700,
         }}
-        title="Attempts"
+        title="Versuche"
       >
         {attempts}
       </div>
 
-      {/* Секретное число скрыто */}
+      {/* Geheime Zahl verborgen */}
       <div style={{ textAlign: "center", fontSize: 42, margin: "16px 0" }}>
         ???
       </div>
@@ -45,7 +45,7 @@ export function GameView({
         <input
           value={guess}
           onChange={(e) => onGuessChange(e.target.value)}
-          placeholder="Введите число 1–20"
+          placeholder="Geben Sie eine Zahl zwischen 1–20 ein"
           inputMode="numeric"
           style={{ padding: 10, fontSize: 16, width: 220 }}
         />
@@ -54,13 +54,13 @@ export function GameView({
         </button>
       </div>
 
-      {/* Подсказка */}
+      {/* Hinweis */}
       <p style={{ textAlign: "center", marginTop: 14, minHeight: 24 }}>
         {message}
       </p>
 
       <p style={{ textAlign: "center", opacity: 0.7 }}>
-        Диапазон: 1–20
+        Bereich: 1–20
       </p>
     </div>
   );

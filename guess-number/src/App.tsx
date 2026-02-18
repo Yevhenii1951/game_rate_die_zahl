@@ -5,7 +5,7 @@ import { WinView } from "./components/WinView";
 import { HighscoreList } from "./components/HighscoreList";
 import { loadHighscores, saveHighscores, type Highscore } from "./utils/storage";
 
-// Генератор случайного числа от min до max включительно
+// Generator für Zufallszahl von min bis max einschließlich
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -14,43 +14,43 @@ const MIN = 1;
 const MAX = 20;
 
 export default function App() {
-  // 1) Загаданное число
+  // 1) Geheime Zahl
   const [secretNumber, setSecretNumber] = useState<number>(() => randomInt(MIN, MAX));
 
-  // 2) Состояния игры
+  // 2) Spielstatus
   const [guess, setGuess] = useState<string>("");
   const [attempts, setAttempts] = useState<number>(0);
   const [message, setMessage] = useState<string>("");
 
-  // 3) Победа
+  // 3) Gewinn
   const [isWon, setIsWon] = useState<boolean>(false);
 
   // 4) Highscore
   const [playerName, setPlayerName] = useState<string>("");
   const [highscores, setHighscores] = useState<Highscore[]>([]);
 
-  // Сообщение на экране победы (например "Введите имя")
+  // Nachricht auf dem Gewinnbildschirm (z.B. "Geben Sie Ihren Namen ein")
   const [winMessage, setWinMessage] = useState<string>("");
 
-  // Загружаем highscores один раз при старте
+  // Laden Sie Highscores einmal beim Start
   useEffect(() => {
     setHighscores(loadHighscores());
   }, []);
 
   function handleSubmitGuess() {
-    // Превращаем строку в число
+    // String in Zahl umwandeln
     const numberGuess = Number(guess);
 
-    // Проверка: число ли это и 1..20 ли
+    // Überprüfung: Ist dies eine Zahl und zwischen 1..20?
     if (!Number.isInteger(numberGuess) || numberGuess < MIN || numberGuess > MAX) {
       setMessage(`Bitte gib eine ganze Zahl von ${MIN} bis ${MAX} ein.`);
       return;
     }
 
-    // Это валидная попытка → увеличиваем счётчик
+    // Dies ist ein gültiger Versuch → Zähler erhöhen
     setAttempts((prev) => prev + 1);
 
-    // Сравнение с секретом
+    // Vergleich mit dem Geheimnis
     if (numberGuess > secretNumber) {
       setMessage("Zu groß");
       return;
@@ -60,7 +60,7 @@ export default function App() {
       return;
     }
 
-    // Угадал
+    // Richtig geraten
     setMessage("Gewonnen!");
     setIsWon(true);
     setWinMessage("");
@@ -76,7 +76,7 @@ export default function App() {
 
     const newEntry: Highscore = { name, attempts };
 
-    // Добавляем, сортируем по attempts (меньше лучше), оставляем топ-10
+    // Hinzufügen, nach Versuchen sortieren (weniger ist besser), Top-10 behalten
     const updated = [...highscores, newEntry]
       .sort((a, b) => a.attempts - b.attempts)
       .slice(0, 10);
@@ -97,7 +97,7 @@ export default function App() {
     setWinMessage("");
   }
 
-  // Рендер
+  // Render
   return (
     <div>
       {!isWon ? (
@@ -111,20 +111,20 @@ export default function App() {
       ) : (
         <>
           <WinView
-  attempts={attempts}
-  secretNumber={secretNumber} //
-  playerName={playerName}
-  onNameChange={setPlayerName}
-  onSave={handleSaveScore}
-  onNewGame={handleNewGame}
-  message={winMessage}
-/>
+            attempts={attempts}
+            secretNumber={secretNumber}
+            playerName={playerName}
+            onNameChange={setPlayerName}
+            onSave={handleSaveScore}
+            onNewGame={handleNewGame}
+            message={winMessage}
+          />
 
           <HighscoreList highscores={highscores} />
         </>
       )}
 
-      {/* маленькая кнопка очистки highscores (по желанию) */}
+      {/* Kleine Schaltfläche zum Löschen der Highscores (optional) */}
       <div style={{ textAlign: "center", marginBottom: 24, opacity: 0.7 }}>
         <button
           onClick={() => {
@@ -134,7 +134,7 @@ export default function App() {
           }}
           style={{ padding: "6px 10px" }}
         >
-          Clear Highscore
+          Highscores löschen
         </button>
       </div>
     </div>
